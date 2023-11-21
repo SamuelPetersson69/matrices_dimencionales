@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int n, m;
+    printf("ingrese el numero de filas: ");
+    scanf("%d", &n);
+    printf("Ingrese el numero de columnas: ");
+    scanf("%d", &m);
+
+    int **matrix = (int **)malloc(n * sizeof(int *));
+    if (matrix == NULL) {
+        printf("No se pudo meter el numero para las filas ja ja ja.\n");
+        return 1;
+    }
+
+    for (int i = 0; i < n; i++) {
+        matrix[i] = (int *)malloc(m * sizeof(int));
+        if (matrix[i] == NULL) {
+            printf("No se pudo meter la cantidad para las columnas escribe bien.\n");
+            return 1;
+        }
+    }
+
+    // Iniciar la matriz a 0
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            matrix[i][j] = 0;
+        }
+    }
+
+
+    for (int i = 0; i < n && i < m; i++) {
+        matrix[i][i] = 1;
+    }
+
+    printf("la matris con la diagonal principal toco 1:\n");
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            printf("%d\t", matrix[i][j]);
+        }
+        printf("\n");
+    }
+
+    // esta wea Libera la memoria asignada
+    for (int i = 0; i < n; i++) {
+        free(matrix[i]);
+    }
+    free(matrix);
+
+    return 0;
+}
